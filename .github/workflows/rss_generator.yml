@@ -26,12 +26,15 @@ jobs:
     - name: Generate RSS Feed
       run: python generate_rss.py
 
-    - name: Commit and push RSS feed
+    - name: Configure Git
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+
+    - name: Commit and Push Changes
+      run: |
         git add index.xml
-        git commit -m "Update daily RSS feed" || echo "No changes to commit"
+        git diff --cached --quiet || git commit -m "Update daily RSS feed"
         git push origin HEAD
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
