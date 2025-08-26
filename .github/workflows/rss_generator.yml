@@ -32,5 +32,8 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add index.xml
-        git commit -m "Update daily RSS feed"
+        git commit -m "Update daily RSS feed" || echo "No changes to commit"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
