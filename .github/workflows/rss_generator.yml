@@ -19,10 +19,19 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: python -m pip install --upgrade pip
+      run: |
+        echo "Upgrading pip..."
+        python -m pip install --upgrade pip
 
     - name: Generate RSS Feed
-      run: python generate_rss.py
+      run: |
+        echo "Running generate_rss.py..."
+        python generate_rss.py
+
+    - name: List files for verification
+      run: |
+        echo "Listing files in repo..."
+        ls -la
 
     - name: Push changes
       uses: ad-m/github-push-action@v0.6.0
